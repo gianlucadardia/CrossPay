@@ -1,0 +1,57 @@
+{% extends "crosspay/base.html" %}
+
+{% block title %}Login{% endblock %}
+
+{% block additional_css %}
+	{% load static %}
+    <link href="{% static 'crosspay/css/login.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block nav_login %}
+        <li class="active"><a href="{% url 'login' %}">Login <span class="sr-only">(current)</span></a></li>
+{% endblock %}
+
+{% block content %}
+
+		<form class="form-signin" action="{% url 'django.contrib.auth.views.login' %}" method="post" id="login-form">
+			{% csrf_token %}
+  			<div class="form-signin-inner">
+				<h2>Login</h2>
+
+				{% if form.errors %}
+				<div class="alert alert-danger">
+					<ul>
+					{% for field in form %}
+						{% if field.errors %}
+						<li>{{ field.label_tag }} {{ field.errors|striptags }}</li>
+						{% endif %}
+					{% endfor %}
+					</ul>
+					{% if form.non_field_errors %}
+					{{ form.non_field_errors }}
+					{% endif %}
+				</div>
+				{% endif %}
+
+				<div class="form-group">
+					{{ form.username.label_tag }}
+					{{ form.username }}
+				</div>
+				<div class="form-group">
+					{{ form.password.label_tag }}
+					{{ form.password }}
+					<input type="hidden" name="next" value="{{ next }}" />
+				</div>
+
+
+				<div class="form-actions clearfix">
+					<input type="submit" value="Log in" class="btn btn-lg btn-primary btn-block" />
+				</div>
+				<div class="form-group">
+					<p></p>
+					<p>Don't have an account? <a href="{% url 'register' %}">Register</a><!-- <br/>
+					<a href="#">Forgot password?</a></p> -->
+				</div>
+			</div>
+		</form>
+{% endblock %}

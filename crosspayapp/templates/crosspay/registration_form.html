@@ -1,0 +1,83 @@
+{% extends "crosspay/base.html" %}
+
+{% block title %}Register{% endblock %}
+
+{% block additional_css %}
+	{% load static %}
+    <link href="{% static 'crosspay/css/login.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+		<!-- {{ form }} -->
+		{{ form.non_field_errors }}
+		<form class="form-signin form-register" action="" method="post" id="login-form">
+			{% csrf_token %}
+  			<div class="form-signin-inner">
+				<h2>Register</h2>
+
+				{% if form.errors %}
+				<div class="alert alert-danger">
+					<ul>
+						{% if form.first_name.errors %}
+						<li>First name</li>
+						{{ form.first_name.errors }}
+						{% endif %}
+						
+						{% if form.last_name.errors %}
+						<li>Last name</li>
+						{{ form.last_name.errors }}
+						{% endif %}
+						
+						{% if form.username.errors %}
+						<li>Username</li>
+						{{ form.username.errors }}
+						{% endif %}
+						
+						{% if form.email.errors %}
+						<li>Email</li>
+						{{ form.email.errors }}
+						{% endif %}
+						
+						{% if form.password1.errors %}
+						<li>Password</li>
+						{{ form.password1.errors }}
+						{% endif %}
+						
+						{% if form.password2.errors %}
+						<li>Password confirmation</li>
+						{{ form.password2.errors }}
+						{% endif %}
+					</ul>
+				</div>
+				{% endif %}
+
+				<div class="col-md-6 col-xs-12">
+				{% for field in form %}
+				{% if forloop.counter <= 3 %}
+				<div class="form-group">
+					{{ field.label_tag }}
+					{{ field }}
+					<span class="help-block">{{ field.help_text }}</span>
+				</div>
+				{% endif %}
+				{% endfor %}
+				</div>
+
+				<div class="col-md-6 col-xs-12">
+				{% for field in form %}
+				{% if forloop.counter > 3 %}
+				<div class="form-group">
+					{{ field.label_tag }}
+					{{ field }}
+					<span class="help-block">{{ field.help_text }}</span>
+				</div>
+				{% endif %}
+				{% endfor %}
+				</div>
+
+				<div class="form-actions clearfix">
+					<input type="submit" value="Register" class="btn btn-lg btn-primary pull-right" />
+				</div>
+			</div>
+		</form>
+{% endblock %}

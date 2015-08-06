@@ -1,0 +1,38 @@
+{% extends "crosspay/base.html" %}
+
+{% block title %}Register{% endblock %}
+
+{% block additional_css %}
+	{% load static %}
+    <link href="{% static 'crosspay/css/login.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+		{{ form }}
+		<form class="form-signin" action="{% url 'django.contrib.auth.views.login' %}" method="post" id="login-form">
+			{% csrf_token %}
+  			<div class="form-signin-inner">
+				<h2>Login</h2>
+
+				{% if form.errors %}
+				<div class="alert alert-danger">Your username and password didn't match. Please try again.</div>
+				{% endif %}
+
+				<div class="form-group">
+					{{ form.username.help_text }}
+					{{ form.username.label_tag }}
+					{{ form.username }}
+				</div>
+				<div class="form-group">
+					{{ form.password.label_tag }}
+					{{ form.password }}
+					<input type="hidden" name="next" value="{{ next }}" />
+				</div>
+
+
+				<div class="form-actions clearfix">
+					<input type="submit" value="Log in" class="btn btn-lg btn-primary btn-block" />
+				</div>
+			</div>
+		</form>
+{% endblock %}

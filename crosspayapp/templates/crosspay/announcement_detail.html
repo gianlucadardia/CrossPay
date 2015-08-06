@@ -1,0 +1,113 @@
+{% extends "crosspay/base.html" %}
+
+{% block title %}Announcement Detail{% endblock %}
+
+{% block content %}
+        <div class="page-header">
+            <h1>Announcement detail</h1>
+        </div>
+        <div class="row">
+          <div class="col-md-6 col-xs-12">
+            <h2>Overview</h2>
+            <dl class="dl-horizontal">
+              <dt>Status</dt>
+              <dd>
+              {% if announcement.completed %}
+                <p class="text-danger"><strong>Closed</strong></p>
+              {% else %}
+                <p class="text-success"><strong>Active</strong></p>
+              {% endif %}
+              </dd>
+              <dt>From</dt>
+              <dd>{{ announcement.localCity }}, {{ announcement.localCountry }}</dd>
+              <dt>To</dt>
+              <dd>{{ announcement.foreignCity }}, {{ announcement.foreignCountry }}</dd>
+              <dt>Amount</dt>
+              <dd>{{ announcement.amount }} {{ announcement.currency }}</dd>
+              <dt>Published on</dt>
+              <dd>{{ announcement.created }} (UTC)</dd>
+              {% if announcement.completed %}
+              <dt>Closed on</dt>
+              <dd>{{ announcement.completedDate }} (UTC)</dd>
+              {% endif %}
+              {% if announcement.msg %}
+              <dt>Message</dt>
+              <dd>{{ announcement.msg }}</dd>
+              {% endif %}
+            </dl>
+          </div>
+          <div class="col-md-6 col-xs-12">
+            <h2>Contact</h2>
+            <dl class="dl-horizontal">
+              <dt>Name</dt>
+              <dd>
+              {% if announcement.completed %}
+              Not available (closed)
+              {% else %}
+              {{ announcement.author.get_full_name }}
+              {% endif %}
+              </dd>
+              <dt>E-mail</dt>
+              <dd>
+              {% if announcement.completed %}
+              Not available (closed)
+              {% else %}
+              {{ announcement.author.email }}
+              {% endif %}
+              </dd>
+              {% if announcement.phone %}
+              <dt>Phone</dt>
+              <dd>{% if announcement.completed %}
+              Not available (closed)
+              {% else %}
+              +{{ announcement.localCountry.dialing_code }} - {{ announcement.phone }}
+              {% endif %}
+              </dd>
+              {% endif %}
+            </dl>
+            {% if not announcement.completed and announcement.author.id == user.id %}
+            <a href="{% url 'announcement_archive' pk=announcement.pk %}" class="btn btn-warning btn-lg" role="button">Mark as done</a>
+            {% endif %}
+          </div>
+          <!-- <div class="col-md-12 col-xs-12">
+            <h2>Similar announcements</h2>
+            <table id="recent" class="table table-striped table-bordered" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Created</th>
+                        <th>From</th>
+                        <th>To</th>
+                        <th>Amount</th>
+                        <th>Currency</th>
+                    </tr>
+                </thead>
+         
+                <tfoot>
+                    <tr>
+                        <th>Created</th>
+                        <th>From</th>
+                        <th>To</th>
+                        <th>Amount</th>
+                        <th>Currency</th>
+                    </tr>
+                </tfoot>
+         
+                <tbody>
+                    {% for announcement in recent %}
+                    {% if user.is_authenticated %}
+                    <tr class='clickable-row' data-href='{% url 'announcement_detail' pk=announcement.id %}'>
+                    {% else %}
+                    <tr>
+                    {% endif %}
+                        <td>{{ announcement.created|timesince }} ago</td>
+                        <td>{{ announcement.localCity }}, {{ announcement.localCountry }}</td>
+                        <td>{{ announcement.foreignCity }}, {{ announcement.foreignCountry }}</td>
+                        <td>{{ announcement.amount }}</td>
+                        <td>{{ announcement.currency }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+          </div> -->
+        </div>
+{% endblock %}

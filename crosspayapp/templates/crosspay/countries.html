@@ -1,0 +1,30 @@
+{% extends "crosspay/base.html" %}
+
+{% block title %}Select country{% endblock %}
+
+{% block nav_announce %}
+		{% if current_view == 'announce' %}
+        <li class="active"><a href="{% url 'announce' %}">Announce <span class="sr-only">(current)</span></a></li>
+        {% else %}
+        <li><a href="{% url 'announce' %}">Announce</a></li>
+        {% endif %}
+{% endblock %}
+
+{% block nav_find %}
+		{% if current_view == 'find' %}
+        <li class="active"><a href="{% url 'find' %}">Find <span class="sr-only">(current)</span></a></li>
+        {% else %}
+        <li><a href="{% url 'find' %}">Find</a></li>
+        {% endif %}
+{% endblock %}
+
+{% block content %}
+        <div class="page-header">
+            <h1>{{ page_title }}</h1>
+        </div>
+        <ul class="list-unstyled">
+        {% for country in countries|dictsort:"name" %}
+          <li class="col-md-4" style="background-image: url(http://www.geonames.org/flags/x/{{ country.iso_code|lower }}.gif); background-repeat: no-repeat; background-position: 0px center; padding-left: 35px; background-size: 22px auto;"><a href="{{ country.iso_code|lower }}/">{{ country.name }}</a></li>
+        {% endfor %}
+        </ul>
+{% endblock %}

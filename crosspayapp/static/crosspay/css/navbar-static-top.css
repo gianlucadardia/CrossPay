@@ -1,0 +1,39 @@
+body {
+  min-height: 100px;
+}
+
+.navbar-static-top {
+  margin: 20px 0;
+}
+
+.navbar-default {
+	background-color: transparent;
+	border-color: transparent;
+}
+
+.navbar-brand {
+	color: #2a2a2a !important;
+	font-size: 3em;
+	font-weight: bold;
+}
+
+.navbar-brand sup {
+	font-size: 0.3em;
+	top: -1.5em;
+}
+
+.navbar-default .navbar-nav > li > a {
+	color: #2a2a2a;
+	font-weight: bold;
+}
+
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:focus, .navbar-default .navbar-nav > .active > a:hover {
+	background-color: transparent;
+	color: #ccc;
+	/*border-bottom: #2a2a2a solid 2px;*/
+}
+
+.navbar-default .navbar-nav > li > a:focus, .navbar-default .navbar-nav > li > a:hover {
+	color: #999;
+	transition: 1s;
+}

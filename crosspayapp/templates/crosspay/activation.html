@@ -1,0 +1,13 @@
+{% extends "crosspay/base.html" %}
+
+{% block title %}Activate your account{% endblock %}
+
+{% block content %}
+		<div class="page-header">
+            <h1>{{ title }}</h1>
+        </div>
+        <p>{{ msg }}</p>
+        {% if title == "Success!" %}
+        <a class="btn btn-lg btn-success" href="{% url 'login' %}" role="button">Login</a>
+        {% endif %}
+{% endblock %}

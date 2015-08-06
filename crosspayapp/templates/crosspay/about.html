@@ -1,0 +1,28 @@
+{% extends "crosspay/base.html" %}
+
+{% block title %}How it works{% endblock %}
+
+{% block nav_about %}
+        <li class="active"><a href="{% url 'about' %}">How it works <span class="sr-only">(current)</span></a></li>
+{% endblock %}
+
+{% block content %}
+        <div class="page-header">
+            <h1>How it works?</h1>
+        </div>
+        <p>Let's say, Anna, from Delhi, wants to send money to New York for her tution fees. On the other hand, Jack, living in New York, needs to send money to Delhi as his friend lost credit card there while traveling. Now both of them can not send money due to some limitations. Can't Jack pay for Anna in New York and Anna for Jack in Delhi?</p>
+        <p><b>CrossPay</b> is a meeting place of people like Anna and Jack. If you are in a situation like Anna and Jack you can announce it through <b>CrossPay</b> or find someone with whom you can interchange your payment.</p>
+
+        <p><strong>Happy CrossPay-ing!</strong></p>
+
+        <p>Got more questions? You can check <a href="{% url 'faq' %}">frequently asked questions</a>.</p>
+
+        <p>For privacy policies, check <a href="{% url 'privacy' %}">privacy policies page</a>.</p>
+
+        <p>For user level agreements, check <a href="{% url 'ula' %}">user level agreements page</a>.</p>
+        <p>
+          <br/><br/>
+          <a class="btn btn-lg btn-success" href="{% url 'announce' %}" role="button">Announce</a>
+          <a class="btn btn-lg btn-primary" href="{% url 'find' %}" role="button">Find other's Announcements</a>
+        </p>
+{% endblock %}
